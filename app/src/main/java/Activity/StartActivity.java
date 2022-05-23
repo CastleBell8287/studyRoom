@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import Admin.AdminActivity;
 import kr.ac.yeonsung.ksj.ex1.R;
 
 public class StartActivity extends AppCompatActivity {
@@ -57,7 +58,7 @@ public class StartActivity extends AppCompatActivity {
 
         public void run() {
 
-            startActivity(new Intent (getApplication(),AdminActivity.class));
+            startActivity(new Intent (getApplication(), AdminActivity.class));
 
             StartActivity.this.finish();
 

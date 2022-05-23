@@ -1,4 +1,4 @@
-package Activity;
+package Admin;
 
 import android.content.Intent;
 import android.os.Bundle;

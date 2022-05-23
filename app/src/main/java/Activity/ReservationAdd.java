@@ -398,6 +398,7 @@ public class ReservationAdd extends AppCompatActivity {
 
     private void myStartActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

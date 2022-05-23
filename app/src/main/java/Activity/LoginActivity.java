@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import Admin.AdminActivity;
 import kr.ac.yeonsung.ksj.ex1.R;
 
 public class LoginActivity extends AppCompatActivity {

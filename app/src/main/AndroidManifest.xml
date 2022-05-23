@@ -54,7 +54,7 @@
         <activity android:name="Activity.ChatView">
 
         </activity>
-        <activity android:name="Activity.AdminActivity">
+        <activity android:name="Admin.AdminActivity">
 
         </activity>
         <activity
@@ -64,7 +64,7 @@
         </activity>
         <activity
             android:hardwareAccelerated="false"
-            android:name="Activity.ReservationCheckActivity">
+            android:name="Admin.ReservationCheckActivity">
 
         </activity>
         <activity
@@ -74,12 +74,12 @@
         </activity>
         <activity
             android:hardwareAccelerated="false"
-            android:name="Activity.RoomManageView">
+            android:name="Admin.RoomManageView">
 
         </activity>
         <activity
             android:hardwareAccelerated="false"
-            android:name="Activity.StudyRoomManageActivity">
+            android:name="Admin.StudyRoomManageActivity">
 
         </activity>
 

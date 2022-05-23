@@ -1,4 +1,4 @@
-package Activity;
+package Admin;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -27,8 +27,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -43,7 +46,6 @@ import kr.ac.yeonsung.ksj.ex1.R;
 public class RoomManageView extends AppCompatActivity {
 
     private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private TextView managed_study_room;
     private String room_id;
     private EditText edit_study_room_num,edit_study_room_max_people,edit_study_room_min_people;
@@ -55,8 +57,8 @@ public class RoomManageView extends AppCompatActivity {
     private String room_num;
     private DatabaseReference mRef;
     private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase2;
 
-    private final DatabaseReference root = FirebaseDatabase.getInstance().getReference("rooms");
     private final StorageReference reference = FirebaseStorage.getInstance().getReference();
 
     @Override
@@ -85,7 +87,6 @@ public class RoomManageView extends AppCompatActivity {
 
 
         managed_study_room.setText(room_num+" 정보 관리");
-
 
 
         StorageReference pathReference = reference.child(room_id+".jpg");
@@ -152,7 +153,24 @@ public class RoomManageView extends AppCompatActivity {
                         firebaseFirestore.collection("rooms").document(room_id).update("room_num", edit_study_room_num.getText().toString());
                         firebaseFirestore.collection("rooms").document(room_id).update("max_people", Long.parseLong(edit_study_room_max_people.getText().toString()));
                         firebaseFirestore.collection("rooms").document(room_id).update("min_people", Long.parseLong(edit_study_room_min_people.getText().toString()));
+                        mDatabase = mRef.child("reservation").child(room_id);
 
+                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                    String str = dataSnapshot.getKey().toString();
+                                    if(dataSnapshot.child("room_name").getValue().toString().equals(room_num)){
+                                        mDatabase.child(str).child("room_name").setValue(edit_study_room_num.getText().toString());
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                         if (imageUri != null) {
                             uploadToFirebase(imageUri);
                         }

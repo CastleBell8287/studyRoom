@@ -1,4 +1,4 @@
-package adapter1;
+package Admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-import Activity.RoomManageView;
 import Info.RoomInfo;
 import kr.ac.yeonsung.ksj.ex1.R;
 
