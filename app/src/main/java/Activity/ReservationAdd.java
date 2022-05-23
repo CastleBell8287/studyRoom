@@ -68,7 +68,7 @@ public class ReservationAdd extends AppCompatActivity {
     private String room_num, room_id;
     private HashMap<String, String> reservation = new HashMap<String, String>();
     private TextView date_text;
-    String member_name,member_email;
+    String member_name;
     private ArrayAdapter<String> adapter;
     private HashMap member = new HashMap();
     private ArrayList<String> groups = new ArrayList<>();
@@ -255,8 +255,7 @@ public class ReservationAdd extends AppCompatActivity {
                                             if(task2.isSuccessful()){
                                                 DocumentSnapshot document2 = task2.getResult();
                                                 member_name = document2.getData().get("name").toString();
-                                                member_email = key;
-                                                Memberlist mb = new Memberlist(member_name,member_email);
+                                                Memberlist mb = new Memberlist(member_name);
                                                 member_list.add(mb);
                                             }
                                             memberadapter.notifyDataSetChanged();
@@ -284,9 +283,6 @@ public class ReservationAdd extends AppCompatActivity {
                     } else if(check_personal.isChecked()){
                         mDatabase = FirebaseDatabase.getInstance().getReference();
                         int i = 1;
-                        Intent in = getIntent();
-                        member = in.getParcelableExtra("member");
-                        System.out.println("이거야이거 " + member);
                         for (String key : hash.keySet()) {
 
                             HashMap user_map2;

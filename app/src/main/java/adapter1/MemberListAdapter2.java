@@ -43,7 +43,6 @@ public class MemberListAdapter2 extends RecyclerView.Adapter<MemberListAdapter2.
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
         holder.member_name.setText(member_list.get(position).getMemberName());
-        holder.member_email.setText(member_list.get(position).getMemberEmail());
 
     }
 
@@ -55,12 +54,10 @@ public class MemberListAdapter2 extends RecyclerView.Adapter<MemberListAdapter2.
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView member_name;
-        TextView member_email;
         CheckBox checkBox;
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             this.member_name = itemView.findViewById(R.id.memberName);
-            this.member_email = itemView.findViewById(R.id.memberEmail);
             this.checkBox = itemView.findViewById(R.id.check);
 
         }

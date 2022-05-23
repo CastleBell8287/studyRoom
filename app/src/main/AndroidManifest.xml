@@ -82,6 +82,16 @@
             android:name="Admin.StudyRoomManageActivity">
 
         </activity>
+        <activity
+            android:hardwareAccelerated="false"
+            android:name="Activity.ReservationView">
+
+        </activity>
+        <activity
+            android:hardwareAccelerated="false"
+            android:name="Activity.ReservationUpdate">
+
+        </activity>
 
     </application>
 

@@ -2,21 +2,26 @@ package adapter1;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
+import Activity.ReservationView;
 import Info.MyReservationInfo;
 import kr.ac.yeonsung.ksj.ex1.R;
 
 public class My_ReservationAdapter extends RecyclerView.Adapter<My_ReservationAdapter.CustomViewHolder> {
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<MyReservationInfo> arrayList_my_reservaion;
     private Context context;
 
@@ -57,6 +62,7 @@ public class My_ReservationAdapter extends RecyclerView.Adapter<My_ReservationAd
         TextView start_time;
         TextView reservation_day;
         TextView room_id;
+        LinearLayout reservation_view;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,9 +71,24 @@ public class My_ReservationAdapter extends RecyclerView.Adapter<My_ReservationAd
             this.reservation_day = itemView.findViewById(R.id.reservation_day);
             this.start_time = itemView.findViewById(R.id.start_time);
             this.room_id = itemView.findViewById(R.id.room_id);
+            this.reservation_view = itemView.findViewById(R.id.reservation_view);
+            reservation_view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    reservationGo();
+                }
+            });
 
 
-
+        }
+        public void reservationGo() {
+            Intent intent = new Intent(context.getApplicationContext(), ReservationView.class);
+            intent.putExtra("reservation_id",(String)reservation_id.getText());
+            intent.putExtra("room_id",(String)room_id.getText());
+            intent.putExtra("reservation_day", (String) reservation_day.getText());
+            intent.putExtra("start_time", (String) start_time.getText());
+            intent.putExtra("room_name",(String)reservation_room.getText());
+            context.startActivity(intent);
         }
     }
 }

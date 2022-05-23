@@ -328,7 +328,7 @@ public void member_list(){  //view 안에 회원목록
 
                                             if(task2.isSuccessful()){
                                                 DocumentSnapshot document2 = task2.getResult();
-                                                member_list.add(new Memberlist(document2.getData().get("name").toString(),key));
+                                                member_list.add(new Memberlist(document2.getData().get("name").toString()));
                                                 memberAdapter = new MemberListAdapter(member_list);
                                                 listView.setAdapter(memberAdapter);
                                             }
