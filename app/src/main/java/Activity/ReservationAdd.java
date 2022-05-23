@@ -68,8 +68,9 @@ public class ReservationAdd extends AppCompatActivity {
     private String room_num, room_id;
     private HashMap<String, String> reservation = new HashMap<String, String>();
     private TextView date_text;
-    String member_name;
+    String member_name,member_email;
     private ArrayAdapter<String> adapter;
+    private HashMap member = new HashMap();
     private ArrayList<String> groups = new ArrayList<>();
     private String group_id;
     private HashMap<String, Object> user_map = new HashMap<>();
@@ -254,8 +255,8 @@ public class ReservationAdd extends AppCompatActivity {
                                             if(task2.isSuccessful()){
                                                 DocumentSnapshot document2 = task2.getResult();
                                                 member_name = document2.getData().get("name").toString();
-                                                Memberlist mb = new Memberlist(member_name);
-                                                System.out.println("여기 "  + member_name);
+                                                member_email = key;
+                                                Memberlist mb = new Memberlist(member_name,member_email);
                                                 member_list.add(mb);
                                             }
                                             memberadapter.notifyDataSetChanged();
@@ -283,9 +284,12 @@ public class ReservationAdd extends AppCompatActivity {
                     } else if(check_personal.isChecked()){
                         mDatabase = FirebaseDatabase.getInstance().getReference();
                         int i = 1;
+                        Intent in = getIntent();
+                        member = in.getParcelableExtra("member");
+                        System.out.println("이거야이거 " + member);
                         for (String key : hash.keySet()) {
 
-                            HashMap user_map2 = new HashMap();
+                            HashMap user_map2;
                             user_map2 = hash.get(key);
                             user_map2.put("email", key);
 
@@ -315,6 +319,7 @@ public class ReservationAdd extends AppCompatActivity {
                     }else {
                         mDatabase = FirebaseDatabase.getInstance().getReference();
                         int i = 1;
+
                         for (String key : hash.keySet()) {
 
                             HashMap user_map2 = new HashMap();
